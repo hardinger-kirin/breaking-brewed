@@ -40,5 +40,8 @@ public class UserInputScript : MonoBehaviour
         else if(Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.P)){
             Debug.Log("Sugar");
         }
+        else if(Input.GetKeyDown(KeyCode.Escape)){
+            Debug.Log("Pause Menu");
+        }
     }
 }
