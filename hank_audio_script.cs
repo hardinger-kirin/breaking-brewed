@@ -21,4 +21,8 @@ public class hank_audio_script : MonoBehaviour
     {
         
     }
+
+    public void playmugMoment() {
+        mugMoment_source.PlayOneShot(mugMoment);
+    }
 }

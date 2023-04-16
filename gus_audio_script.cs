@@ -43,4 +43,24 @@ public class gus_audio_script : MonoBehaviour
     {
         
     }
+
+    public void playDiscussion() {
+        discussion_source.PlayOneShot(discussion);
+    }
+
+    public void playOffer() {
+        offer_source.PlayOneShot(offer);
+    }
+
+    public void playInterfere() {
+        interfere_source.PlayOneShot(interfere);
+    }
+
+    public void playPartTime() {
+        partTime_source.PlayOneShot(partTime);
+    }
+
+    public void playHelpYou() {
+        helpYou_source.PlayOneShot(helpYou);
+    }
 }

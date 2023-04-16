@@ -1,3 +1,6 @@
+//Nick Larson
+//April 15 2023
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +9,7 @@ public class ScaleEffect : MonoBehaviour
 {
     public bool effectStatus = true;
 
-    float scaleSpeed = 0.005f;
+    float scaleSpeed = 0.0005f;
     float startScale;
     float maxScale, minScale;
     bool growing = true;
@@ -33,11 +36,7 @@ public class ScaleEffect : MonoBehaviour
         }
     }
 
-    public void enableScale(){
-        effectStatus = true;
-    }
-
-    public void disableScale(){
-        effectStatus = false;
+    public void setScale(bool flag) {
+        effectStatus = flag;
     }
 }

@@ -19,46 +19,34 @@ public class MainScript : MonoBehaviour {
     GameObject w_key;
     GameObject mini_game1;
     QuickTimeEvent_SliderMovement minigame1;
-    bool flag = false;
-
+    private bool flag = false;
     public Sprite full_coffee;
     public Sprite empty_coffee;
     public Sprite full_espresso;
     public Sprite empty_espresso;
-
-    //p2 assets
-    GameObject p2_machine;
-    GameObject p2_espresso;
-    GameObject p2_coffee;
-    GameObject TextCanvas2;
-    GameObject ok2;
-    GameObject text2;
-
     GameObject hank;
     bool hank_outcome = false;
     GameObject saul;
     bool saul_outcome = false;
     GameObject jesse;
     bool jesse_outcome = false;
-
-    GameObject marie;
-    GameObject skyler;
-    GameObject jr;
-
     int p1_state = 0;
-    int p2_state = 0;
-
     bool p1_enable = true;
-    bool p2_enable = true;
-
     string p1_currentText = "";
-    string p2_currentText = "";
-
     private float text_delay = 0.05f;
+    hank_audio_script hank_script;
+    saul_audio_script saul_script;
+    jesse_audio_script jesse_script;
+    SFX_audio_script audio_script;
 
     private void Start() {
+        audio_script = FindObjectOfType<SFX_audio_script>();
         //initialize
         initialize();
+    }
+
+    public int get_p1() {
+        return p1_state;
     }
 
     private void Update() {
@@ -70,9 +58,11 @@ public class MainScript : MonoBehaviour {
                     StartCoroutine(WaitChangeText1("Yo! Don't question why there's two of me."));
                     break;
                 case 1:
+                    jesse_script.playBeans();
                     StartCoroutine(WaitChangeText1("Gimme uhh... some coffee beans."));
                     break;
                 case 2:
+                    jesse_script.playYeaScience();
                     StartCoroutine(WaitChangeText1("SIKE! Haha. Gimme a coffee with sugar."));
                     break;
                 case 3:
@@ -91,7 +81,7 @@ public class MainScript : MonoBehaviour {
                     p1_state++;
                     break;
                 case 5:
-                    //coffee pour sound
+                    audio_script.playFillingCup();
                     if(!minigame1.get_state()) {
                         c_key.SetActive(false);
                         p1_coffee.GetComponent<SpriteRenderer>().sprite = full_coffee;
@@ -102,10 +92,12 @@ public class MainScript : MonoBehaviour {
                     }
                     break;
                 case 6:
+                    audio_script.playGlassClink();
                     TextCanvas1.SetActive(true);
                     s_key.SetActive(false);
-
+                    audio_script.playDrinkSip();
                     if (jesse_outcome) {
+                        jesse_script.playHellYea();
                         StartCoroutine(WaitChangeText1("Damn! That's some good shit. See ya."));
                     }
                     else {
@@ -143,7 +135,7 @@ public class MainScript : MonoBehaviour {
                     p1_state++;
                     break;
                 case 12:
-                    //espresso pour sound
+                    audio_script.playFillingCup();
                     if (!minigame1.get_state()) {
                         e_key.SetActive(false);
                         p1_espresso.GetComponent<SpriteRenderer>().sprite = full_espresso;
@@ -154,11 +146,14 @@ public class MainScript : MonoBehaviour {
                     }
                     break;
                 case 13:
+                    audio_script.playGlassClink();
+                    audio_script.playDrinkSip();
                     TextCanvas1.SetActive(true);
                     w_key.SetActive(false);
 
                     if (hank_outcome) {
-                        StartCoroutine(WaitChangeText1("Hooooeee! You're like a meth cooker but with coffee. Adios!"));
+                        hank_script.playmugMoment();
+                        StartCoroutine(WaitChangeText1("You're like a chemist but with coffee. Mug moment!"));
                     }
                     else {
                         StartCoroutine(WaitChangeText1("Maybe you should try going back to the car wash... Adios!"));
@@ -195,8 +190,10 @@ public class MainScript : MonoBehaviour {
                     p1_state++;
                     break;
                 case 19:
-                    //coffee pour sound
+                    audio_script.playFillingCup();
                     if (!minigame1.get_state()) {
+                        audio_script.playGlassClink();
+                        audio_script.playDrinkSip();
                         c_key.SetActive(false);
                         p1_coffee.GetComponent<SpriteRenderer>().sprite = full_coffee;
                         mini_game1.SetActive(false);
@@ -204,6 +201,7 @@ public class MainScript : MonoBehaviour {
                         TextCanvas1.SetActive(true);
 
                         if (saul_outcome) {
+                            saul_script.playBetterCall();
                             StartCoroutine(WaitChangeText1("Just how I like it. Call me!"));
                         }
                         else {
@@ -218,12 +216,6 @@ public class MainScript : MonoBehaviour {
                     break;
                 default:
                     break;
-            }
-        }
-
-        if(p2_enable) {
-            switch(p2_state) {
-                //
             }
         }
     }
@@ -255,26 +247,6 @@ public class MainScript : MonoBehaviour {
         p1_state++;
     }
 
-    private IEnumerator WaitChangeText2(string str) {
-        p2_enable = false;
-        ok2.SetActive(false);
-
-        for (int i = 0; i < str.Length; i++) {
-            p2_currentText = str.Substring(0, i + 1);
-            text2.GetComponent<TMPro.TextMeshProUGUI>().text = p2_currentText;
-            yield return new WaitForSeconds(text_delay);
-        }
-
-        ok2.SetActive(true);
-        StartCoroutine(WaitGetKey2());
-    }
-
-    private IEnumerator WaitGetKey2() {
-        yield return new WaitUntil(() => (Input.GetKeyDown(KeyCode.O) || Input.GetKeyDown(KeyCode.K)));
-        p2_enable = true;
-        p2_state++;
-    }
-
     private void initialize() {
         p1_machine = GameObject.Find("machine1");
         p1_espresso = GameObject.Find("espresso1");
@@ -288,21 +260,13 @@ public class MainScript : MonoBehaviour {
         w_key = GameObject.Find("w_key");
         mini_game1 = GameObject.Find("Minigame1");
         minigame1 = FindObjectOfType<QuickTimeEvent_SliderMovement>();
-
-        p2_machine = GameObject.Find("machine2");
-        p2_espresso = GameObject.Find("espresso2");
-        p2_coffee = GameObject.Find("coffee2");
-        TextCanvas2 = GameObject.Find("TextCanvas2");
-        ok2 = GameObject.Find("ok2");
-        text2 = GameObject.Find("text2");
+        hank_script = FindObjectOfType<hank_audio_script>();
+        saul_script = FindObjectOfType<saul_audio_script>();
+        jesse_script = FindObjectOfType<jesse_audio_script>();
 
         hank = GameObject.Find("hank");
         saul = GameObject.Find("saul");
         jesse = GameObject.Find("jesse");
-
-        marie = GameObject.Find("marie");
-        skyler = GameObject.Find("skyler");
-        jr = GameObject.Find("jr");
 
         setInactives();
     }
@@ -318,17 +282,8 @@ public class MainScript : MonoBehaviour {
         w_key.SetActive(false);
         mini_game1.SetActive(false);
 
-        p2_espresso.SetActive(false);
-        p2_coffee.SetActive(false);
-        TextCanvas2.SetActive(false);
-        ok2.SetActive(false);
-
         hank.SetActive(false);
         saul.SetActive(false);
         jesse.SetActive(false);
-
-        marie.SetActive(false);
-        skyler.SetActive(false);
-        jr.SetActive(false);
     }
 }

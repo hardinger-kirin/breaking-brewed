@@ -35,4 +35,20 @@ public class gale_audio_script : MonoBehaviour
     {
         
     }
+
+    public void playMuchBetter() {
+        muchBetter_source.PlayOneShot(muchBetter);
+    }
+
+    public void playQuiteGood() {
+        quiteGood_source.PlayOneShot(quiteGood);
+    }
+
+    public void playPresume() {
+        presume_source.PlayOneShot(presume);
+    }
+
+    public void playThankYou() {
+        thankYou_source.PlayOneShot(thankYou);
+    }
 }

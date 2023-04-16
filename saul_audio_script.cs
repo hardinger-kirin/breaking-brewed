@@ -21,4 +21,8 @@ public class saul_audio_script : MonoBehaviour
     {
         
     }
+
+    public void playBetterCall() {
+        betterCall_source.PlayOneShot(betterCall);
+    }
 }

@@ -1,3 +1,6 @@
+//Donavin Phelps
+//April 15 2023
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,15 +19,16 @@ public class LoadNext : MonoBehaviour
         time = 0f;
         timeDelay = 3f;
     }
+
     // Update is called once per frame
     void Update()
     {
         time = time + 1f*Time.deltaTime;
         if(time>timeDelay){
             if(!introVideo.isPlaying){
-            SceneManager.LoadScene(sceneName: "StartMenuScene");
-       } 
+                SceneManager.LoadScene(sceneName: "andNick");
+            } 
         }
-
+       
     }
 }

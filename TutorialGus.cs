@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class TutorialGus : MonoBehaviour {
+    gus_audio_script gus_script;
     int currentState = 0;
 
     private float text_delay = 0.05f;
@@ -19,6 +20,7 @@ public class TutorialGus : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         textbox = GameObject.Find("text");
+        gus_script = FindObjectOfType<gus_audio_script>();
         ok = GameObject.Find("ok");
     }
 
@@ -30,12 +32,14 @@ public class TutorialGus : MonoBehaviour {
                     StartCoroutine(WaitChangeText("Greetings, gentlemen. Welcome to your first day as baristas."));
                     break;
                 case 1:
+                    gus_script.playDiscussion();
                     StartCoroutine(WaitChangeText("As you may know, I am the manager of this establishment."));
                     break;
                 case 2:
                     StartCoroutine(WaitChangeText("Gustavo Fring. Pleasure."));
                     break;
                 case 3:
+                    gus_script.playHelpYou();
                     StartCoroutine(WaitChangeText("Go ahead and handle a few customers on your own."));
                     break;
                 case 4:

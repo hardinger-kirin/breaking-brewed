@@ -21,4 +21,9 @@ public class waltjr_audio_script : MonoBehaviour
     {
         
     }
+
+    public void playPussy() {
+        pussy_source.PlayOneShot(pussy);
+    }
 }
+

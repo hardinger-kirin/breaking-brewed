@@ -45,4 +45,24 @@ public class jesse_audio_script : MonoBehaviour
     {
         
     }
+
+    public void playBeans() {
+        beans_source.PlayOneShot(beans);
+    }
+
+    public void playHellYea() {
+        hellYea_source.PlayOneShot(hellYea);
+    }
+
+    public void playPartner() {
+        partner_source.PlayOneShot(partner);
+    }
+
+    public void playYeaMrWhite() {
+        yeaMrWhite_source.PlayOneShot(yeaMrWhite);
+    }
+
+    public void playYeaScience() {
+        yeaScience_source.PlayOneShot(yeaScience);
+    }
 }

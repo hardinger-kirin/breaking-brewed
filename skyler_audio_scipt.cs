@@ -20,4 +20,8 @@ public class skyler_audio_scipt : MonoBehaviour
     {
         
     }
+
+    public void playImSkylerWhite() {
+        imSkylerWhite_source.PlayOneShot(imSkylerWhite);
+    }
 }

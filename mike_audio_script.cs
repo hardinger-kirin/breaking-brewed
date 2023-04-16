@@ -21,4 +21,8 @@ public class mike_audio_script : MonoBehaviour
     {
         
     }
+
+    public void playWaltuh() {
+        waltuh_source.PlayOneShot(waltuh);
+    }
 }

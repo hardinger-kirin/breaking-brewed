@@ -12,13 +12,17 @@ public class marie_audio_script : MonoBehaviour
     {
       AudioSource[] audio_sources = GetComponents<AudioSource>();
 
-        myHusband_source = audio_sources[0];
-        myHusband = myHusband_source.clip;  
+      myHusband_source = audio_sources[0];
+      myHusband = myHusband_source.clip;  
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void playMyHusband() {
+        myHusband_source.PlayOneShot(myHusband);
     }
 }

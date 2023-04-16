@@ -45,4 +45,24 @@ public class walter_audio_script : MonoBehaviour
     {
         
     }
+
+    public void playBestCoffee() {
+        bestCoffee_source.PlayOneShot(bestCoffee);
+    }
+
+    public void playIAmTheCoffee() {
+        iAmTheCoffee_source.PlayOneShot(iAmTheCoffee);
+    }
+
+    public void playImTheCook() {
+        imTheCook_source.PlayOneShot(imTheCook);
+    }
+
+    public void playVictoryLaugh() {
+        victoryLaugh_source.PlayOneShot(victoryLaugh);
+    }
+
+    public void playSoSeriously() {
+        soSeriously_source.PlayOneShot(soSeriously);
+    }
 }
