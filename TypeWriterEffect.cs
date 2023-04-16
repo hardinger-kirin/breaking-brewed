@@ -12,9 +12,9 @@ public class TypeWriterEffect : MonoBehaviour
     public float textDelay = 0.4f;
     public string fullText;
     private string currentText = "";
+    
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         StartCoroutine(ShowText());
     }
 
